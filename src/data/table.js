@@ -47,7 +47,6 @@ let columns7 = [
         ]),
         h(select,{
           props:{
-            users: params.row.users,
             urlId:params.row._id,
             allotId:params.row.allotId
           }

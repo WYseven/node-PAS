@@ -11,13 +11,19 @@ export default {
   name: 'hello',
   data () {
     return {
-      columns7:columns7,
-      data6:[]
+      columns7:columns7
+    }
+  },
+  computed:{
+    data6(){
+      return this.$store.getters.urlDataFilter;
     }
   },
   mounted(){
+    this.$store.dispatch('getUrlsDataAction');
+
     // 获取所有问题的地址
-    this.$http.get('/api/urls')
+    /*this.$http.get('/api/urls')
     .then((data) => {
       let datas = data.data;
       datas.forEach((item) => {
@@ -33,8 +39,8 @@ export default {
         })
         this.data6 = datas;
       })
-    });
-    
+    });*/
+
   },
   methods: {
     selectClick(){

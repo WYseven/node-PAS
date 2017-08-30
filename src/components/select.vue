@@ -8,19 +8,29 @@
 <script>
 export default {
   name:'select',
-  props:['users','urlId',"allotId"],
+  props:['urlId',"allotId"],
   data(){
     return {
-      cityList: [],
       model2: ''
     }
   },
   computed:{
+    users(){
+      return this.$store.state.users;
+    },
     initValue(){
       let userNameFilter = this.users.filter((item) => {
         return item._id === this.allotId;
       });
       return userNameFilter.length ? userNameFilter[0].userName : '分配';
+    },
+    cityList(){
+      return this.users.map((item) => {
+        return {
+          value: item._id,
+          label: item.userName
+        }
+      })
     }
   },
   watch:{
@@ -32,17 +42,12 @@ export default {
           userId
         }
       }).then((data) => {
-        //console.log(data.data)
+        console.log(data.data);
       })
     }
   },
   mounted(){
-    this.cityList = this.users.map((item) => {
-      return {
-        value: item._id,
-        label: item.userName
-      }
-    })
+
   },
   methods:{
     abc(){
@@ -56,5 +61,3 @@ export default {
   display: inline-block;
 }
 </style>
-
-

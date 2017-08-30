@@ -7,7 +7,7 @@ import Axios from 'axios'
 import VueAxios from 'vue-axios'
 import iView from 'iview';
 import 'iview/dist/styles/iview.css';    // 使用 CSS
-
+import store from './store'
 Vue.config.productionTip = false
 
 Vue.use(iView);
@@ -17,6 +17,7 @@ Vue.use(VueAxios,Axios);
 new Vue({
   el: '#app',
   router,
+  store,
   template: '<App/>',
   components: { App }
 })
