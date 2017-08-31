@@ -37,6 +37,9 @@ let store = new Vuex.Store({
     },
     async getUsers({commit,dispatch}){
       return axios.get('/user/getUsers')
+    },
+    async getUrlsByKeyWord({commit,dispatch}){
+      return axios.get('/api/getDataByKeyWord')
     }
   }
 })
