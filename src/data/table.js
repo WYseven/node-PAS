@@ -50,6 +50,18 @@ let columns7 = [
             urlId:params.row._id,
             allotId:params.row.allotId
           }
+        }),
+        h('Button',{
+          props: {
+            type: 'primary',
+            size: 'small'
+          },
+          domProps:{
+            innerText: '回答完成'
+          },
+          style: {
+              marginLeft: '5px'
+          }
         })
       ])
     }

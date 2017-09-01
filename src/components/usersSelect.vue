@@ -7,8 +7,7 @@
 </template>
 <script>
 export default {
-  name:'select',
-  props:['urlId',"allotId"],
+  name:'users-select',
   data(){
     return {
       model2: ''
@@ -19,17 +18,15 @@ export default {
       return this.$store.state.users;
     },
     initValue(){
-      let userNameFilter = this.users.filter((item) => {
-        return item._id === this.allotId;
-      });
-      return userNameFilter.length ? userNameFilter[0].userName : '分配';
+      return '选择';
     },
     cityList(){
-      return this.users.map((item) => {
-        return {
-          value: item._id,
-          label: item.userName
-        }
+        return this.users.map((item) => {
+          console.log(item._id);
+          return {
+            value: item._id,
+            label: item.userName
+          }
       })
     }
   },
@@ -42,8 +39,6 @@ export default {
           userId
         }
       }).then((data) => {
-        console.log(data.data);
-        this.$store.commit('updataByAllotId',data.data.urlInfo)
       })
     }
   },

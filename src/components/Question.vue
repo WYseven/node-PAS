@@ -1,10 +1,12 @@
 <template>
   <div class="hello">
+    <users-select />
     <Table on-row-click='selectClick' border :columns="columns7" :data="data6"></Table>
   </div>
 </template>
 
 <script>
+import usersSelect from './usersSelect'
 import {columns7,data6} from '@/data/table'
 import Vue from 'vue'
 export default {
@@ -14,6 +16,9 @@ export default {
       columns7:columns7
     }
   },
+  components:{
+    usersSelect
+  },
   computed:{
     data6(){
       return this.$store.getters.urlDataFilter;
@@ -21,26 +26,6 @@ export default {
   },
   mounted(){
     this.$store.dispatch('getUrlsDataAction');
-
-    // 获取所有问题的地址
-    /*this.$http.get('/api/urls')
-    .then((data) => {
-      let datas = data.data;
-      datas.forEach((item) => {
-        item.status = '未回答';
-      })
-      return datas;
-    }).then((datas) =>{
-      // 获取讲师
-      this.$http.get('/user/getUsers').then((data) => {
-        console.log(data.data)
-        datas.forEach((item) => {
-          item.users = data.data;
-        })
-        this.data6 = datas;
-      })
-    });*/
-
   },
   methods: {
     selectClick(){

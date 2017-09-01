@@ -2,7 +2,14 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
 
-Vue.use(Vuex)
+Vue.use(Vuex);
+
+// 问题状态
+let questionStatus = {
+  unAnswer: '未回答',
+  allotNoAnswer: '已分配',
+  answerDone: '回答了'
+}
 
 let store = new Vuex.Store({
   state:{
@@ -12,7 +19,7 @@ let store = new Vuex.Store({
   getters:{
     urlDataFilter(state){
       state.urlData.forEach((item) => {
-        item.status = '未回答';
+        item.status = questionStatus[item.flagAnswer];
       })
 
       return state.urlData;
@@ -26,6 +33,18 @@ let store = new Vuex.Store({
     setUsersData(state, payload){
       state.users = payload.users;
       // 给每一条数据添加
+    },
+    updataByAllotId(state, payload){
+      let data = state.urlData;
+      let index = null;
+      let newData = data.filter((item,i) => {
+                    index = i;
+                    return payload.id === item.id;
+                  })[0];
+          newData.flagAnswer="allotNoAnswer"
+      // 给每一条数据添加
+
+      state.urlData.splice(index,1,newData)
     }
   },
   actions:{
