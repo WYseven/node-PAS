@@ -22,7 +22,7 @@ export default {
       let userNameFilter = this.users.filter((item) => {
         return item._id === this.allotId;
       });
-      return userNameFilter.length ? userNameFilter[0].userName : '分配';
+      return userNameFilter.length ? userNameFilter[0].userName : '未分配';
     },
     cityList(){
       return this.users.map((item) => {
@@ -42,8 +42,7 @@ export default {
           userId
         }
       }).then((data) => {
-        console.log(data.data);
-        this.$store.commit('updataByAllotId',data.data.urlInfo)
+        this.$store.commit('updataByAllotId',data.data.data)
       })
     }
   },

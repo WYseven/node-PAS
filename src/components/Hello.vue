@@ -5,7 +5,6 @@
         <Table border :columns="columns7" :data="data6"></Table>
       </Col>
     </Row>
-    
   </div>
 </template>
 

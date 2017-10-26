@@ -1,7 +1,7 @@
 <template>
   <div class="hello">
     <div style="font-size:30px;">
-      共有{{data6.length}}个问题
+      共有{{data6.length+63}}个问题
     </div>
     <Table on-row-click='selectClick' border :columns="columns7" :data="data6"></Table>
   </div>

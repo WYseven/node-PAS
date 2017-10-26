@@ -18,6 +18,7 @@ let store = new Vuex.Store({
   },
   getters:{
     urlDataFilter(state){
+      // 标明问题的状态
       state.urlData.forEach((item) => {
         item.status = questionStatus[item.flagAnswer];
       })
@@ -36,23 +37,23 @@ let store = new Vuex.Store({
     },
     updataByAllotId(state, payload){
       let data = state.urlData;
-      let index = null;
-      let newData = data.filter((item,i) => {
-                    index = i;
-                    return payload.id === item.id;
-                  })[0];
-          newData.flagAnswer="allotNoAnswer"
-      // 给每一条数据添加
-
-      state.urlData.splice(index,1,newData)
+      // 找到那一条更新
+      let option = state.urlData.find((item) =>  item._id === payload._id)
+      option.allotId = payload.allotId;
+    },
+    updataByAllotFlag(state, payload){
+      let data = state.urlData;
+      // 找到那一条更新
+      let option = state.urlData.find((item) =>  item._id === payload._id)
+      option.flagAnswer = payload.flagAnswer;
     }
   },
   actions:{
     async getUrlsDataAction({commit,dispatch}){
-      let urlsData = await axios.get('/api/urls');
-      let usersData = await dispatch('getUsers');
-      commit('setUrlsData',{urls:urlsData.data})
-      commit('setUsersData',{users:usersData.data})
+      let urls = await axios.get('/api/urls');  // 获取所有的问题
+      let users = await dispatch('getUsers');   // 获取讲师人数
+      commit('setUrlsData',{urls:urls.data})
+      commit('setUsersData',{users:users.data})
     },
     async getUsers({commit,dispatch}){
       return axios.get('/user/getUsers')
